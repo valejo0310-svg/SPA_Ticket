@@ -1,37 +1,11 @@
 import { register }         from "../services/authService.js";
 import { validateEmail }    from "../utils/validators.js";
+import { loadHTML } from "../utils/helpers.js";
 
-export function registerPage() {
+export async function registerPage() {
   const app = document.getElementById("app");
 
-  app.innerHTML = `
-    <div class="auth-container">
-      <div class="auth-card">
-        <h1>TicketSPA</h1>
-        <h2>Crear Cuenta</h2>
-
-        <div id="regError"   class="alert alert-error   hidden"></div>
-        <div id="regSuccess" class="alert alert-success hidden"></div>
-
-        <div class="form-group">
-          <label>Nombre</label>
-          <input id="regName" type="text" placeholder="Tu nombre" class="input">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input id="regEmail" type="email" placeholder="tu@email.com" class="input">
-        </div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input id="regPassword" type="password" placeholder="••••••" class="input">
-        </div>
-        <button id="regBtn" class="btn btn-primary btn-full">Registrarse</button>
-        <p class="auth-footer">
-          ¿Ya tenés cuenta? <a href="#/login">Ingresá</a>
-        </p>
-      </div>
-    </div>
-  `;
+  app.innerHTML = await loadHTML ('./assets/js/views/registrer.html');
 
   document.getElementById("regBtn")
     .addEventListener("click", async () => {

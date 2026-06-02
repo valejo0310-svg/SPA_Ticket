@@ -2,18 +2,15 @@ import { renderNavbar }                  from "../components/navbar.js";
 import { getSession }                    from "../utils/storage.js";
 import { getTickets, getTicketsByCliente, getTicketsByTecnico } from "../services/ticketService.js";
 import { isAdmin, isTecnico, isCliente } from "../middleware/roleMiddleware.js";
+import { loadHTML } from "../utils/helpers.js";
 
 export async function dashboardPage(app) {
   const user = getSession();
 
-  app.innerHTML = `
-    <main class="main-content">
-      <h1>Dashboard</h1>
-      <h3>Bienvenido, ${user.name} <span class="badge badge-role">${user.role}</span></h3>
-      <div id="stats" class="stats-grid">Cargando estadísticas...</div>
-    </main>
-  `;
+  app.innerHTML = await loadHTML('./assets/js/views/dashboard.html');
   renderNavbar();
+  document.getElementById("userName").textContent = user.name;
+  document.getElementById("userRole").textContent = user.role;
 
   // Obtener tickets según el rol
   let tickets = [];

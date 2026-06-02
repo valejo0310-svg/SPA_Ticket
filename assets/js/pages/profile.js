@@ -2,32 +2,17 @@ import { renderNavbar }  from "../components/navbar.js";
 import { getSession }    from "../utils/storage.js";
 import { updateUser }    from "../services/userService.js";
 import { saveSession }   from "../utils/storage.js";
+import { loadHTML } from "../utils/helpers.js";
 
 export async function profilePage(app) {
   const user = getSession();
 
-  app.innerHTML = `
-    <main class="main-content">
-      <h1>Mi Perfil</h1>
-      <div class="auth-card profile-card">
-        <div class="form-group">
-          <label>Nombre</label>
-          <input id="profName" class="input" value="${user.name}">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input class="input" value="${user.email}" disabled>
-        </div>
-        <div class="form-group">
-          <label>Rol</label>
-          <input class="input" value="${user.role}" disabled>
-        </div>
-        <div id="profMsg" class="alert hidden"></div>
-        <button id="saveProfile" class="btn btn-primary">Guardar cambios</button>
-      </div>
-    </main>
-  `;
+  app.innerHTML = await loadHTML ('./assets/js/views/profile.html');
   renderNavbar();
+  document.getElementById("profName").value = user.name;
+  document.getElementById("input1").value = user.email;
+  document.getElementById("input2").value = user.role;
+
 
   document.getElementById("saveProfile")
     .addEventListener("click", async () => {
