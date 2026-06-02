@@ -1,0 +1,25 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "Carlos Mendoza",
+      "email": "admin@empresa.com",
+      "rol": "admin",
+      "activo": true
+    },
+    {
+      "id": "2",
+      "nombre": "Laura Gómez",
+      "email": "laura.tecnico@empresa.com",
+      "rol": "tecnico",
+      "activo": true
+    },
+    {
+      "id": "3",
+      "nombre": "Alberto Ruiz",
+      "email": "alberto.tecnico@empresa.com",
+      "rol": "tecnico",
+      "activo": false
+    }
+  ]
+}
