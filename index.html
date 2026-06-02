@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA Vanilla JS</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <header id="navbar"></header>
+        <main id="content"></main>
+    </div>
+
+
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Editar Personaje</h2>
+            <form id="edit-form">
+                <label for="edit-name">Nombre</label>
+                <input type="text" id="edit-name" placeholder="Nombre" />
+
+                <label for="edit-status">Status</label>
+                <input type="text" id="edit-status" placeholder="Alive / Dead / unknown" />
+
+                <label for="edit-species">Species</label>
+                <input type="text" id="edit-species" placeholder="Human / Alien..." />
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn--save">Guardar</button>
+                    <button type="button" id="cancel-edit" class="btn btn--cancel">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="./assets/js/app.js"></script>
+</body>
+
+</html>
