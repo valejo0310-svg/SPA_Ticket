@@ -1,21 +1,34 @@
-/**
- * Navbar Component
- */
+import { logout }      from "../services/authService.js";
+import { getSession }  from "../utils/storage.js";
+import { isAdmin }     from "../middleware/roleMiddleware.js";
 
-export async function loadNavbar() {
+export function renderNavbar() {
+  const user = getSession();
+  if (!user) return;
 
-    const navbar = document.getElementById('navbar');
+  const adminLinks = isAdmin(user)
+    ? `<a href="#/users" class="nav-link">Usuarios</a>`
+    : "";
 
-    navbar.innerHTML = `
-        <nav class="navbar">
-            <a href="/" data-link>Home</a>
-            <a href="/new" data-link>Crear personaje</a>
-            <a href="/episodes" data-link> Episodes</a>
-            <a href="/locations" data-link> Locations</a>
-            <a href="/contacts" data-link>Contactos</a>
-            <a href="/about" data-link> Quiénes Somos</a>
-            
+  const nav = document.createElement("nav");
+  nav.className = "navbar";
+  nav.innerHTML = `
+    <div class="nav-brand">🎫 TicketSPA</div>
+    <div class="nav-links">
+      <a href="#/dashboard" class="nav-link">Dashboard</a>
+      <a href="#/tickets"   class="nav-link">Tickets</a>
+      ${adminLinks}
+      <a href="#/profile"   class="nav-link">Perfil</a>
+    </div>
+    <div class="nav-user">
+      
+      <span>${user.name}</span>
+      <button id="logoutBtn" class="btn btn-danger btn-sm">Salir</button>
+    </div>
+  `;
 
-        </nav>
-    `
+  document.getElementById("app").prepend(nav);
+
+  document.getElementById("logoutBtn")
+    .addEventListener("click", logout);
 }

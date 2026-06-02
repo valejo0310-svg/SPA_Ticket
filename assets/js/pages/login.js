@@ -1,99 +1,62 @@
-import { loadHTML } from '../utils/helpers.js';
-import { characterCard } from '../components/characterCard.js';
-import { deleteCharacter, updateCharacter } from '../services/api.js';
-import { saveAllData } from '../services/api.js';
+import { login }            from "../services/authService.js";
+import { validateLoginForm } from "../utils/validators.js";
 
-/**
- * Renderiza Home
- */
+export function loginPage() {
+  const app = document.getElementById("app");
 
-export async function renderHome() {
-    const content = document.getElementById('content');
-    content.innerHTML = await loadHTML('./assets/js/views/home.html');
+  app.innerHTML = `
+    <div class="auth-container">
+      <div class="auth-card">
+        <h1>TicketSPA</h1>
+        <h2>Iniciar Sesión</h2>
 
+        <div id="loginError" class="alert alert-error hidden"></div>
 
-    renderCharacters(); // función separada para poder re-renderizar
-    const recargarApi = document.getElementById('recargar-Api');
-    recargarApi.addEventListener('click', async () => {
-        const estaSeguro = confirm("¿Estás seguro de que deseas restablecer los datos de la api? Se perderan todos los cambios realizados.");
-        if (!estaSeguro) {
-        return false;
-    }
-        await saveAllData();
-        renderCharacters(); // re-renderiza sin recargar la página
+        <div class="form-group">
+          <label>Email</label>
+          <input id="loginEmail" type="email" placeholder="admin@test.com" class="input">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input id="loginPassword" type="password" placeholder="••••••" class="input">
+        </div>
+        <button id="loginBtn" class="btn btn-primary btn-full">Ingresar</button>
+
+        <p class="auth-footer">
+          ¿No tenés cuenta? <a href="#/register">Registrate</a>
+        </p>
+
+        <div class="demo-credentials">
+          <p><strong>Demo:</strong></p>
+          <p>Admin: admin@test.com / 123456</p>
+          <p>Técnico: juan@test.com / 123456</p>
+          <p>Cliente: maria@test.com / 123456</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("loginBtn")
+    .addEventListener("click", async () => {
+      const email    = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      const errorDiv = document.getElementById("loginError");
+
+      const errors = validateLoginForm({ email, password });
+      if (errors.length) {
+        errorDiv.textContent = errors.join(" ");
+        errorDiv.classList.remove("hidden");
+        return;
+      }
+
+      errorDiv.classList.add("hidden");
+
+      const user = await login(email, password);
+      if (user) {
+        window.location.hash = "#/dashboard";
+      } else {
+        errorDiv.textContent = "Credenciales incorrectas.";
+        errorDiv.classList.remove("hidden");
+      }
     });
-
-    const container = document.getElementById('characters-container');
-    const modal     = document.getElementById('edit-modal');
-    const form      = document.getElementById('edit-form');
-    const cancelBtn = document.getElementById('cancel-edit');
-
-    let editingId = null; // guardamos el id del personaje que se está editando
-
-    // ── Delegación de eventos en las cards ──────────────────────
-    container.addEventListener('click', (e) => {
-
-        // ELIMINAR
-        const deleteBtn = e.target.closest('[data-action="delete"]');
-        if (deleteBtn) {
-            const id = Number(deleteBtn.dataset.id);
-            deleteCharacter(id);
-            renderCharacters();
-            return;
-        }
-
-        // EDITAR — abre el modal con los datos actuales del personaje
-        const editBtn = e.target.closest('[data-action="edit"]');
-        if (editBtn) {
-            editingId = Number(editBtn.dataset.id);
-
-            const characters = JSON.parse(localStorage.getItem('db_characters') || '[]');
-            const character  = characters.find(c => c.id === editingId);
-            if (!character) return;
-
-            // Precarga los valores en el formulario
-            document.getElementById('edit-name').value    = character.name;
-            document.getElementById('edit-status').value  = character.status;
-            document.getElementById('edit-species').value = character.species;
-
-            modal.classList.remove('hidden');
-        }
-    });
-
-    // ── Guardar cambios ──────────────────────────────────────────
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        updateCharacter(editingId, {
-            name:    document.getElementById('edit-name').value.trim(),
-            status:  document.getElementById('edit-status').value.trim(),
-            species: document.getElementById('edit-species').value.trim(),
-        });
-
-        modal.classList.add('hidden');
-        editingId = null;
-        renderCharacters();
-    });
-
-    // ── Cancelar / cerrar modal ──────────────────────────────────
-    cancelBtn.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        editingId = null;
-    });
-
-    // Cerrar también si se hace click fuera del modal
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-            editingId = null;
-        }
-    });
-}
-
-function renderCharacters() {
-    const container = document.getElementById('characters-container');
-    const characters = JSON.parse(localStorage.getItem('db_characters') || '[]');
-    container.innerHTML = characters
-        .map(character => characterCard(character))
-        .join('');
 }

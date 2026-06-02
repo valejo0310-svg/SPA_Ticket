@@ -1,16 +1,14 @@
-/**
- * Helpers reutilizables
- */
-export async function loadHTML(path) {
+export function saveSession(user) {
+  localStorage.setItem("user", JSON.stringify(user));
+  localStorage.setItem("loginTime", Date.now().toString());
+}
 
-    try {
-        const response = await fetch(path);
-        if (!response.ok) {
-            throw new Error(`Error cargando HTML: ${path}`);
-        }
-        return await response.text();
-    } catch (error) {
-        console.error(error);
-        return '<h2>Error cargando contenido</h2>';
-    }
+export function getSession() {
+  const raw = localStorage.getItem("user");
+  return raw ? JSON.parse(raw) : null;
+}
+
+export function clearSession() {
+  localStorage.removeItem("user");
+  localStorage.removeItem("loginTime");
 }
