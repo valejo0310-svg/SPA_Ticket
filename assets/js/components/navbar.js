@@ -13,7 +13,7 @@ export function renderNavbar() {
   const nav = document.createElement("nav");
   nav.className = "navbar";
   nav.innerHTML = `
-    <div class="nav-brand">🎫 TicketSPA</div>
+    <div class="nav-brand">TicketSPA</div>
     <div class="nav-links">
       <a href="#/dashboard" class="nav-link">Dashboard</a>
       <a href="#/tickets"   class="nav-link">Tickets</a>

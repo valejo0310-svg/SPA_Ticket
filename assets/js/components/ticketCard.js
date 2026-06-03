@@ -2,7 +2,7 @@ import { formatDate, statusBadge, priorityLabel } from "../utils/helpers.js";
 import { isAdmin, isTecnico }                      from "../middleware/roleMiddleware.js";
 import { getSession }                              from "../utils/storage.js";
 
-export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete, onChangeStatus }) {
+export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete}) {
   
   const user  = getSession();
   const card  = document.createElement("div");

@@ -6,7 +6,7 @@
       "description": "No imprime nada",
       "status": "en progreso",
       "priority": "alta",
-      "tecnicoId": 2,
+      "tecnicoId": "2",
       "clienteId": 3,
       "createdAt": "2025-01-01T10:00:00.000Z"
     },
@@ -28,6 +28,26 @@
       "createdAt": "2026-06-03T02:05:09.643Z",
       "status": "abierto",
       "id": 3,
+      "tecnicoId": "dTqzn0isVwU"
+    },
+    {
+      "title": "error en la pagina de la empresa",
+      "description": "wwewew",
+      "priority": "alta",
+      "clienteId": "2",
+      "createdAt": "2026-06-03T11:30:29.525Z",
+      "status": "abierto",
+      "id": 4,
+      "tecnicoId": "dTqzn0isVwU"
+    },
+    {
+      "title": "jkgdiew",
+      "description": "wergtery",
+      "priority": "alta",
+      "clienteId": "eYwXWYU",
+      "createdAt": "2026-06-03T11:46:12.408Z",
+      "status": "abierto",
+      "id": 5,
       "tecnicoId": "dTqzn0isVwU"
     }
   ]
