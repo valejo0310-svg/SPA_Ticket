@@ -2,7 +2,8 @@ import { formatDate, statusBadge, priorityLabel } from "../utils/helpers.js";
 import { isAdmin, isTecnico }                      from "../middleware/roleMiddleware.js";
 import { getSession }                              from "../utils/storage.js";
 
-export function ticketCard(ticket, { onEdit, onDelete, onChangeStatus }) {
+export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete, onChangeStatus }) {
+  
   const user  = getSession();
   const card  = document.createElement("div");
   card.className = "ticket-card";
@@ -26,6 +27,7 @@ export function ticketCard(ticket, { onEdit, onDelete, onChangeStatus }) {
     <div class="card-meta">
       <span>${priorityLabel(ticket.priority)}</span>
       <span>📅 ${formatDate(ticket.createdAt)}</span>
+      <span>🔧 ${tecnicoNombre}</span>
     </div>
     <div class="card-actions">
       ${editBtn}

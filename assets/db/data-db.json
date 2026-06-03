@@ -19,6 +19,16 @@
       "tecnicoId": 2,
       "clienteId": 3,
       "createdAt": "2025-01-02T10:00:00.000Z"
+    },
+    {
+      "title": "Auxilio",
+      "description": "ayuda",
+      "priority": "alta",
+      "clienteId": 3,
+      "createdAt": "2026-06-03T02:05:09.643Z",
+      "status": "abierto",
+      "id": 3,
+      "tecnicoId": "dTqzn0isVwU"
     }
   ]
 }
