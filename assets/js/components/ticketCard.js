@@ -1,6 +1,6 @@
 import { formatDate, statusBadge, priorityLabel } from "../utils/helpers.js";
-import { isAdmin, isTecnico }                      from "../middleware/roleMiddleware.js";
-import { getSession }                              from "../utils/storage.js";
+import { isAdmin, isTecnico } from "../middleware/roleMiddleware.js";
+import { getSession } from "../utils/storage.js";
 
 export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete}) {
   
@@ -11,11 +11,11 @@ export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete}) {
 
   // Botones condicionales por rol
   const editBtn = (isAdmin(user) || isTecnico(user))
-    ? `<button class="btn btn-sm btn-secondary btn-edit">✏️ Editar estado</button>`
+    ? `<button class="btn btn-sm btn-secondary btn-edit">Editar estado</button>`
     : "";
 
   const deleteBtn = isAdmin(user)
-    ? `<button class="btn btn-sm btn-danger btn-delete">🗑️ Eliminar</button>`
+    ? `<button class="btn btn-sm btn-danger btn-delete">Eliminar</button>`
     : "";
 
   card.innerHTML = `
@@ -26,8 +26,8 @@ export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete}) {
     <p>${ticket.description}</p>
     <div class="card-meta">
       <span>${priorityLabel(ticket.priority)}</span>
-      <span>📅 ${formatDate(ticket.createdAt)}</span>
-      <span>🔧 ${tecnicoNombre}</span>
+      <span> ${formatDate(ticket.createdAt)}</span>
+      <span> ${tecnicoNombre}</span>
     </div>
     <div class="card-actions">
       ${editBtn}
@@ -35,6 +35,7 @@ export function ticketCard(ticket, tecnicoNombre, { onEdit, onDelete}) {
     </div>
   `;
 
+  card.addEventListener("dblclick",() => onEdit(ticket))
   card.querySelector(".btn-edit")  ?.addEventListener("click", () => onEdit(ticket));
   card.querySelector(".btn-delete")?.addEventListener("click", () => onDelete(ticket.id));
 

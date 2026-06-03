@@ -29,6 +29,7 @@ export function openModal({ title, content, onConfirm }) {
     onConfirm();
     close();
   });
+
 }
 
 export function closeModal() {

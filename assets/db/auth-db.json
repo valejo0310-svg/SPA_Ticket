@@ -3,37 +3,37 @@
     {
       "id": "1",
       "name": "admin",
-      "email": "admin@test.com",
+      "email": "admin@gmail.com",
       "password": "123456",
       "role": "admin"
     },
     {
       "id": "2",
       "name": "Juan Técnico",
-      "email": "juan@test.com",
+      "email": "juan@gmail.com",
       "password": "123456",
       "role": "tecnico"
     },
     {
       "id": "3",
       "name": "María Cliente",
-      "email": "maria@test.com",
+      "email": "maria@gmail.com",
       "password": "123456",
       "role": "cliente"
     },
     {
-      "name": "valery",
-      "email": "valery@gmail.com",
-      "password": "123456",
-      "role": "tecnico",
-      "id": "dTqzn0isVwU"
-    },
-    {
-      "name": "valery",
-      "email": "valeryavila@gmail.com",
+      "name": "valentina",
+      "email": "valentina@gmail.com",
       "password": "123456",
       "role": "cliente",
       "id": "eYwXWYU"
+    },
+    {
+      "name": "alexandra",
+      "email": "Alecita@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "id": "ulcT1z9"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

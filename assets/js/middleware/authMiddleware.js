@@ -13,7 +13,6 @@ export function isAuthenticated() {
 export function checkSessionExpiry() {
   const loginTime = localStorage.getItem("loginTime");
   if (!loginTime) return true;
-
   const elapsed = Date.now() - parseInt(loginTime);
 
   if (elapsed >= SESSION_DURATION) {

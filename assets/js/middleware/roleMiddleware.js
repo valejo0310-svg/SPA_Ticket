@@ -3,9 +3,9 @@ import { getSession } from "../utils/storage.js";
 // Mapa de rutas y qué roles pueden acceder
 const ROUTE_PERMISSIONS = {
   "#/dashboard": ["admin", "tecnico", "cliente"],
-  "#/tickets":   ["admin", "tecnico", "cliente"],
-  "#/users":     ["admin"],
-  "#/profile":   ["admin", "tecnico", "cliente"],
+  "#/tickets": ["admin", "tecnico", "cliente"],
+  "#/users": ["admin"],
+  "#/profile": ["admin", "tecnico", "cliente"],
 };
 
 export function canAccessRoute(hash) {
@@ -14,7 +14,6 @@ export function canAccessRoute(hash) {
 
   const allowed = ROUTE_PERMISSIONS[hash];
   if (!allowed) return false;               // ruta desconocida → sin acceso
-
   return allowed.includes(user.role);
 }
 

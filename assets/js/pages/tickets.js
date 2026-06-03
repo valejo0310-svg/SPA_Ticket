@@ -4,15 +4,7 @@ import { openModal } from "../components/modal.js";
 import { getSession } from "../utils/storage.js";
 import { isAdmin, isTecnico, isCliente } from "../middleware/roleMiddleware.js";
 import { validateTicketForm } from "../utils/validators.js";
-import {
-  getTickets,
-  getTicketsByCliente,
-  getTicketsByTecnico,
-  createTicket,
-  updateTicket,
-  deleteTicket,
-  getTecnicos,
-} from "../services/ticketService.js";
+import { getTickets, getTicketsByCliente, getTicketsByTecnico, createTicket, updateTicket, deleteTicket, getTecnicos } from "../services/ticketService.js";
 
 export async function ticketsPage(app) {
   const user = getSession();

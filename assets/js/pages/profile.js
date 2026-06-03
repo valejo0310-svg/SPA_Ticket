@@ -27,7 +27,6 @@ export async function profilePage(app) {
 
 const updated = await updateUser(user.id, { name });
 if (updated) saveSession({ ...user, name: updated.name });
-
       msgDiv.textContent = "¡Perfil actualizado!";
       msgDiv.className = "alert alert-success";
     });

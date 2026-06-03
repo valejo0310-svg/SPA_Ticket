@@ -1,4 +1,4 @@
-import { login }            from "../services/authService.js";
+import { login } from "../services/authService.js";
 import { validateLoginForm } from "../utils/validators.js";
 import { loadHTML } from "../utils/helpers.js";
 import { renderNavbar } from "../components/navbar.js";

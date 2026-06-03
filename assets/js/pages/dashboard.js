@@ -1,5 +1,5 @@
-import { renderNavbar }                  from "../components/navbar.js";
-import { getSession }                    from "../utils/storage.js";
+import { renderNavbar } from "../components/navbar.js";
+import { getSession } from "../utils/storage.js";
 import { getTickets, getTicketsByCliente, getTicketsByTecnico } from "../services/ticketService.js";
 import { isAdmin, isTecnico, isCliente } from "../middleware/roleMiddleware.js";
 import { loadHTML } from "../utils/helpers.js";

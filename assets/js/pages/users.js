@@ -64,7 +64,7 @@ function openRoleModal(userId, currentRole) {
       <div class="form-group">
         <label>Rol</label>
         <select id="mRole" class="input">
-          <option value="admin"   ${currentRole === "admin"   ? "selected" : ""}>Admin</option>
+          <option value="admin" ${currentRole === "admin" ? "selected" : ""}>Admin</option>
           <option value="tecnico" ${currentRole === "tecnico" ? "selected" : ""}>Técnico</option>
           <option value="cliente" ${currentRole === "cliente" ? "selected" : ""}>Cliente</option>
         </select>

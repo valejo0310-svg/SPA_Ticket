@@ -17,24 +17,22 @@ export function statusBadge(status) {
 
 export function priorityLabel(priority) {
   const map = {
-    "alta":  "🔴 Alta",
-    "media": "🟡 Media",
-    "baja":  "🟢 Baja",
+    "alta":  "Alta",
+    "media": "Media",
+    "baja":  "Baja",
   };
   return map[priority] || priority;
 }
 
-
 export async function loadHTML(path) {
-
     try {
         const response = await fetch(path);
         if (!response.ok) {
-            throw new Error(`Error cargando HTML: ${path}`);
+          throw new Error(`Error cargando HTML: ${path}`);
         }
         return await response.text();
     } catch (error) {
-        console.error(error);
-        return '<h2>Error cargando contenido</h2>';
+      console.error(error);
+      return '<h2>Error cargando contenido</h2>';
     }
 }

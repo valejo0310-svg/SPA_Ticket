@@ -1,6 +1,5 @@
-export function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+export const validateEmail = email =>
+  email.includes("@") && email.includes(".");
 
 export function validateTicketForm({ title, description }) {
   const errors = [];
@@ -12,7 +11,7 @@ export function validateTicketForm({ title, description }) {
 }
 
 export function validateLoginForm({ email, password }) {
-  const errors = [];
+  const errors = []
   if (!validateEmail(email))   errors.push("Email inválido.");
   if (!password || password.length < 4) errors.push("Contraseña muy corta.");
   return errors;
