@@ -14,9 +14,9 @@
       "id": 2,
       "title": "PC no enciende",
       "description": "Pantalla en negro",
-      "status": "en progreso",
+      "status": "cerrado",
       "priority": "media",
-      "tecnicoId": 2,
+      "tecnicoId": "2",
       "clienteId": 3,
       "createdAt": "2025-01-02T10:00:00.000Z"
     },
