@@ -21,6 +21,7 @@ export async function createTicket(ticket) {
     ...ticket,
     createdAt: new Date().toISOString(),
     status: "abierto"
+    
   });
   return data;
 }

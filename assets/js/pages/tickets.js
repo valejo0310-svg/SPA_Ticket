@@ -16,7 +16,7 @@ export async function ticketsPage(app) {
     <main class="main-content">
       <div class="page-header">
         <h1>Tickets</h1>
-        ${(isAdmin(user) || isCliente(user))
+        ${(isAdmin(user) || isCliente(user) || isTecnico(user))
           ? `<button id="btnNuevoTicket" class="btn btn-primary">+ Nuevo Ticket</button>`
           : ""}
       </div>
@@ -88,6 +88,7 @@ function openCreateModal(user) {
         errDiv.classList.remove("hidden");
         return;
       }
+
 
       await createTicket({ title, description, priority, clienteId: user.id });
       await renderTickets(user);
