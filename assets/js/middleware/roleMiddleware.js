@@ -1,23 +1,25 @@
 import { getSession } from "../utils/storage.js";
 
-// Mapa de rutas y qué roles pueden acceder
+// definition of which roles can access which routes
 const ROUTE_PERMISSIONS = {
-  "#/dashboard": ["admin", "tecnico", "cliente"],
-  "#/tickets": ["admin", "tecnico", "cliente"],
-  "#/users": ["admin"],
-  "#/profile": ["admin", "tecnico", "cliente"],
+  "#/dashboard": ["admin", "tecnico", "cliente"], // all roles can access dashboard
+  "#/tickets": ["admin", "tecnico", "cliente"], // all roles can access tickets
+  "#/users": ["admin"], // only admin can access users
+  "#/profile": ["admin", "tecnico", "cliente"], // all roles can access profile
 };
 
-export function canAccessRoute(hash) {
-  const user = getSession();
-  if (!user) return false;
+// Checks if the current user has permission to access the given route (hash)
 
-  const allowed = ROUTE_PERMISSIONS[hash];
-  if (!allowed) return false;               // ruta desconocida → sin acceso
-  return allowed.includes(user.role);
+export function canAccessRoute(hash) { // Get the current user session
+  const user = getSession(); // If no user session exists, deny access
+  if (!user) return false; // Get the allowed roles for the given route
+
+  const allowed = ROUTE_PERMISSIONS[hash]; // If the route is not defined in permissions, deny access
+  if (!allowed) return false;  // Check if the user's role is included in the allowed roles for the route
+  return allowed.includes(user.role); //
 }
 
-// Helpers reutilizables en páginas/componentes
+// Helper functions to check user roles
 export const isAdmin   = (user) => user?.role === "admin";
-export const isTecnico = (user) => user?.role === "tecnico";
-export const isCliente = (user) => user?.role === "cliente";
+export const isTecnico = (user) => user?.role === "tecnico"; 
+export const isCliente = (user) => user?.role === "cliente"; 

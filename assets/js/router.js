@@ -8,38 +8,43 @@ import { isAuthenticated } from "./middleware/authMiddleware.js";
 import { checkSessionExpiry } from "./middleware/authMiddleware.js";
 import { canAccessRoute } from "./middleware/roleMiddleware.js";
 
+// Main router function that handles client-side routing based on the URL hash. It checks for authentication, 
+// session expiry, and role-based access control before rendering the appropriate page content.
 export async function router() {
   const app   = document.getElementById("app");
   const hash  = window.location.hash || "#/login";
 
-  // Rutas públicas 
+// Route guard para login y register: si el usuario ya tiene sesión activa, redirige al dashboard
   if (hash === "#/login" || hash === "#/register") {
-    // Si ya tiene sesión activa, redirige al dashboard
+    // if user is authenticated and session is not expired, redirect to dashboard
     if (isAuthenticated() && !checkSessionExpiry()) {
       window.location.hash = "#/dashboard";
       return;
     }
+    // if user is not authenticated, show login or register page based on the hash
     if(hash === "#/login"){
       loginPage()
-    }else{
+    //else if(hash === "#/register"){
+    }else {
       registerPage()
     }
-    return;
+    return; // No need to check permissions or session expiry for login/register pages
   }
 
-  // Verificación de sesión 
+  // protected routes: if user is not authenticated, redirect to login
   if (!isAuthenticated()) {
     window.location.hash = "#/login";
     return;
   }
 
-  // Verificación de expiración (5 minutos) 
+  // Check if session has expired before rendering protected routes.
+  //  If expired, the function will handle logout and redirection to login page.
   if (checkSessionExpiry()) {
     // checkSessionExpiry ya hace el logout y redirige
     return;
   }
 
-  // Verificación de permisos por rol 
+// Role-based access control: check if the user has permission to access the requested route. If not, show an error message.
   if (!canAccessRoute(hash)) {
     app.innerHTML = `
       <div class="error-page">
@@ -50,7 +55,7 @@ export async function router() {
     return;
   }
 
-  // Renderizado de página 
+// Render the appropriate page content based on the URL hash. If the hash does not match any defined routes, show a 404 error message.
   switch (hash) {
     case "#/dashboard": 
     await dashboardPage(app); 

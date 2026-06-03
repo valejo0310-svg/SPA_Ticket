@@ -1,25 +1,28 @@
-import { renderNavbar }            from "../components/navbar.js";
+import { renderNavbar } from "../components/navbar.js";
 import { getUsers, deleteUser, updateUser } from "../services/userService.js";
-import { openModal }               from "../components/modal.js";
+import { openModal } from "../components/modal.js";
 
+//  managment for users
 export async function usersPage(app) {
   app.innerHTML = `
     <main class="main-content">
       <div class="page-header">
-        <h1>👥 Usuarios</h1>
+        <h1> Usuarios</h1>
       </div>
       <div id="userList" class="user-grid">Cargando...</div>
     </main>
   `;
-  renderNavbar();
-  await renderUsers();
+  renderNavbar(); 
+  await renderUsers(); //load users on page load
 }
 
+// reder users list with edit and delete options
 async function renderUsers() {
-  const users     = await getUsers();
+  const users = await getUsers();
   const container = document.getElementById("userList");
   container.innerHTML = "";
 
+  // Create user cards
   users.forEach(user => {
     const card = document.createElement("div");
     card.className = "user-card";
@@ -38,25 +41,27 @@ async function renderUsers() {
         </button>
       </div>
     `;
-    container.appendChild(card);
+    container.appendChild(card); // Add card to container
   });
 
-  // Cambiar rol
-  container.querySelectorAll(".btn-edit-role").forEach(btn => {
-    btn.addEventListener("click", () => openRoleModal(btn.dataset.id, btn.dataset.role));
+  // Edit role
+  container.querySelectorAll(".btn-edit-role").forEach(btn => { // Add click event to each edit button
+    btn.addEventListener("click", () => 
+      openRoleModal(btn.dataset.id, btn.dataset.role)); // Open modal to change role
   });
 
-  // Eliminar usuario
+  // Delete user
   container.querySelectorAll(".btn-del").forEach(btn => {
     btn.addEventListener("click", async () => {
-      if (confirm("¿Eliminar este usuario?")) {
-        await deleteUser(btn.dataset.id);
-        await renderUsers();
+      if (confirm("¿Eliminar este usuario?")) { 
+        await deleteUser(btn.dataset.id); // Call delete API
+        await renderUsers(); // Refresh user list after deletion
       }
     });
   });
 }
 
+// Modal to change user role
 function openRoleModal(userId, currentRole) {
   openModal({
     title: "Cambiar Rol",
@@ -70,10 +75,10 @@ function openRoleModal(userId, currentRole) {
         </select>
       </div>
     `,
-    onConfirm: async () => {
-      const role = document.getElementById("mRole").value;
-      await updateUser(userId, { role });
-      await renderUsers();
+    onConfirm: async () => { // When confirm button is clicked
+      const role = document.getElementById("mRole").value; // Get selected role
+      await updateUser(userId, { role }); // Call update API to change role
+      await renderUsers(); // Refresh user list after role change
     }
   });
 }

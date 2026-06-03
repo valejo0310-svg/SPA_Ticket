@@ -2,12 +2,14 @@ import { register } from "../services/authService.js";
 import { validateEmail } from "../utils/validators.js";
 import { loadHTML } from "../utils/helpers.js";
 
+// page register with form validation and error handling
 export async function registerPage() {
   const app = document.getElementById("app");
 
   app.innerHTML = await loadHTML ('./assets/js/views/registrer.html');
 
   document.getElementById("regBtn")
+  // Event listener for register button
     .addEventListener("click", async () => {
       const name = document.getElementById("regName").value.trim();
       const email  = document.getElementById("regEmail").value.trim();
@@ -15,8 +17,8 @@ export async function registerPage() {
       const errDiv  = document.getElementById("regError");
       const sucDiv = document.getElementById("regSuccess");
 
-      errDiv.classList.add("hidden");
-
+      errDiv.classList.add("hidden"); 
+// Validate form inputs
       if (!name) { 
         errDiv.textContent = "Nombre requerido."; 
         errDiv.classList.remove("hidden"); 
@@ -40,10 +42,10 @@ export async function registerPage() {
           sucDiv.classList.remove("hidden");
         setTimeout(() => { 
           window.location.hash = "#/login"; 
-        }, 1500);
+        }, 1500); // Redirect to login after successful registration
 
       } catch (err) {
-        errDiv.textContent = err.message;
+        errDiv.textContent = err.message; // Show error message from server
         errDiv.classList.remove("hidden");
       }
     });

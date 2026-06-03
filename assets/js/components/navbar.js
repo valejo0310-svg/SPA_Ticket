@@ -1,17 +1,20 @@
 import { logout } from "../services/authService.js";
 import { getSession } from "../utils/storage.js";
 import { isAdmin } from "../middleware/roleMiddleware.js";
+//this component is responsible for rendering the navigation bar and handling user
 
 export function renderNavbar() {
-  const user = getSession();
+  const user = getSession(); // get user session to display user info and conditionally render admin links
   if (!user) return;
-
+// Conditionally render admin links based on user role
   const adminLinks = isAdmin(user)
-    ? `<a href="#/users" class="nav-link">Usuarios</a>`
+    ? `<a href="#/users" class="nav-link">Usuarios</a>` // only show this link if user is admin
     : "";
+// Create nav element and set its innerHTML to the navbar structure. 
+// The links are dynamic based on the user's role (admin or not)
+  const nav = document.createElement("nav"); 
 
-  const nav = document.createElement("nav");
-  nav.className = "navbar";
+  nav.className = "navbar"; // class for styling the navbar, defined in styles.css
   nav.innerHTML = `<nav class="navbar">
   <div class="navbar-container">
     <div class="nav-brand">TicketSPA</div>
@@ -32,14 +35,16 @@ export function renderNavbar() {
 
   `;
 
-  document.getElementById("app").prepend(nav);
+document.getElementById("app").prepend(nav); // prepend nav to the app container so it appears on top of the page
 
 document.getElementById("logoutBtn")
-    .addEventListener("click", () => {
-       let logoutS = confirm("are you sure you want to logout?");
-       if (logoutS) {
-           logout(); 
-       }
+
+// Add event listener to logout button to handle user logout when clicked
+    .addEventListener("click", () => { 
+      let logoutS = confirm("are you sure you want to logout?");
+      if (logoutS) {
+          logout();  // call logout function from authService to clear session and redirect to login page
+    }
     });
 
 }
