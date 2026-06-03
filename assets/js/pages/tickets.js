@@ -92,7 +92,7 @@ function openCreateModal(user) {
         return;
       }
 
-      await createTicket({ title, description, priority, clienteId: user.id });
+      await createTicket({ title, description, priority, tecnicoId: (user.role === "tecnico" ? user.id : ""), clienteId: user.id });
       await renderTickets(user);
     },
   });
