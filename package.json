@@ -2,8 +2,8 @@
   "name": "ticket-spa",
   "version": "1.0.0",
   "scripts": {
-    "auth": "json-server --watch db/auth-db.json --port 3001",
-    "data": "json-server --watch db/data-db.json --port 3002",
+    "auth": "npx json-server --watch assets/db/auth-db.json --port 3001",
+    "data": "npx json-server --watch assets/db/data-db.json --port 3002",
     "dev": "vite",
     "start": "concurrently \"npm run auth\" \"npm run data\" \"npm run dev\""
   },
