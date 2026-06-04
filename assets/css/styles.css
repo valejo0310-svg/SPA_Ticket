@@ -517,6 +517,8 @@ textarea.input { resize: vertical; min-height: 90px; }
     display: none;
     flex-direction: column;
     width: 100%;
+    margin-top: 10px;
+    gap: 8px;
   }
 
   .nav-links.active {
@@ -526,7 +528,55 @@ textarea.input { resize: vertical; min-height: 90px; }
   .nav-user {
     display: none;
   }
+  .navbar {
+    height: auto;
+    overflow: visible;
+  }
+
+  .navbar-container {
+    height: auto;
+    min-height: 64px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  @media (max-width: 768px) {
+  .user-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .user-info {
+    width: 100%;
+  }
+
+  .user-actions {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .user-actions .btn {
+    flex: 1;
+    min-width: 0;
+  }
 }
+
+  .user-actions {
+    flex-direction: column;
+  }
+
+  .user-actions .btn {
+    width: 100%;
+  }
+
+  .btn-sm {
+    height: 38px;
+    font-size: 0.85rem;
+  }
+}
+
+
 /* Móviles pequeños */
 @media (max-width: 480px) {
   .main-content {
