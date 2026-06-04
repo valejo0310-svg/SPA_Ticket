@@ -25,7 +25,7 @@ export function renderNavbar() {
       <a href="#/tickets"   class="nav-link">Tickets</a>
       ${adminLinks}
       <a href="#/profile"   class="nav-link">Perfil</a>
-      <div class="nav-user">
+    
       <span class="user-name">${user.name}</span>
       <button id="logoutBtn" class="btn-logout">Salir</button>
     </div>
@@ -53,8 +53,10 @@ document.getElementById("logoutBtn")
 const toggle = document.querySelector('.menu-toggle');
 const links = document.querySelector('.nav-links');
 
+
 toggle.addEventListener('click', () => {
   links.classList.toggle('active');
+
 });
 
 }

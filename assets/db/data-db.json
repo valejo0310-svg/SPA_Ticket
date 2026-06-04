@@ -29,6 +29,16 @@
       "status": "abierto",
       "id": 4,
       "tecnicoId": "dTqzn0isVwU"
+    },
+    {
+      "title": "holis",
+      "description": "hola hola bola",
+      "priority": "baja",
+      "tecnicoId": "2",
+      "clienteId": "1",
+      "createdAt": "2026-06-04T01:25:52.573Z",
+      "status": "abierto",
+      "id": 5
     }
   ]
 }
