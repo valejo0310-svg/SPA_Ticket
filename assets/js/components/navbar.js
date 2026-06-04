@@ -25,13 +25,14 @@ export function renderNavbar() {
       <a href="#/tickets"   class="nav-link">Tickets</a>
       ${adminLinks}
       <a href="#/profile"   class="nav-link">Perfil</a>
-    </div>
-    
-    <div class="nav-user">
+      <div class="nav-user">
       <span class="user-name">${user.name}</span>
       <button id="logoutBtn" class="btn-logout">Salir</button>
     </div>
   </div>
+    </div>
+    
+    
 </nav>
 
   `;
