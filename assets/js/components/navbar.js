@@ -55,6 +55,7 @@ const links = document.querySelector('.nav-links');
 
 toggle.addEventListener('click', () => {
   links.classList.toggle('active');
+  toggle.textContent = links.classList.contains('active') ? "X" : "☰";
 });
 
 }
