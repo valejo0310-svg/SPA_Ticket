@@ -177,3 +177,10 @@ npx json-server --watch db/data-db.json --port 3002
 
 npm run dev
 ```
+
+## Team members
+
+* Alexandra Peña
+* Valentina Cabas
+* Valery Avila
+* Bryan Lozada (In charge of the presentation)
