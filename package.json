@@ -1,6 +1,7 @@
 {
   "name": "ticket-spa",
   "version": "1.0.0",
+  "author": "Alexandra peña, Valery Avila, Valentina Cabas, Brayan Lozada",
   "scripts": {
     "auth": "npx json-server --watch assets/db/auth-db.json --port 3001",
     "data": "npx json-server --watch assets/db/data-db.json --port 3002",
