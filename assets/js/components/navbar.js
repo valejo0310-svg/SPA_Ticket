@@ -18,7 +18,8 @@ export function renderNavbar() {
   nav.innerHTML = `<nav class="navbar">
   <div class="navbar-container">
     <div class="nav-brand">TicketSPA</div>
-    
+    <button class="menu-toggle">☰</button>
+
     <div class="nav-links">
       <a href="#/dashboard" class="nav-link">Dashboard</a>
       <a href="#/tickets"   class="nav-link">Tickets</a>
@@ -39,6 +40,8 @@ document.getElementById("app").prepend(nav); // prepend nav to the app container
 
 document.getElementById("logoutBtn")
 
+
+
 // Add event listener to logout button to handle user logout when clicked
     .addEventListener("click", () => { 
       let logoutS = confirm("are you sure you want to logout?");
@@ -46,5 +49,11 @@ document.getElementById("logoutBtn")
           logout();  // call logout function from authService to clear session and redirect to login page
     }
     });
+const toggle = document.querySelector('.menu-toggle');
+const links = document.querySelector('.nav-links');
+
+toggle.addEventListener('click', () => {
+  links.classList.toggle('active');
+});
 
 }
